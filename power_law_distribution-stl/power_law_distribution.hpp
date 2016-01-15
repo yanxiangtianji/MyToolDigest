@@ -59,12 +59,21 @@ public:
 	template<class Engine>
 	result_type operator()(Engine& g, const param_type& parm){ return eval(g, parm); }
 
+	friend bool operator==(const power_law_distribution& lth,
+		const power_law_distribution& rth){
+		return lth.par == rth.par;
+	}
+	friend bool operator!=(const power_law_distribution& lth,
+		const power_law_distribution& rth){
+		return lth.par != rth.par;
+	}
+
 	template <class charT, class traits>
 	std::basic_istream<charT, traits>& read(std::basic_istream<charT, traits>& is){
 		T xmin;
 		double a;
 		param_type p;
-		is >> n >> a >> p;
+		is >> a >> p;
 		par.init(xmin, a);
 		par = p;
 		return is;
@@ -75,7 +84,7 @@ public:
 	}
 private:
 	template <class Engine>
-	result_type eval(Engine& eng, const param_type& par) const{
+	result_type eval(Engine& eng, const param_type& par){
 		//urng_type urng;	//uncomment if use dynamic urng
 		return static_cast<result_type>(par.xmin*std::pow(1.0 - urng(eng), par._exp));
 	}
@@ -85,19 +94,19 @@ private:
 	param_type par;
 };
 
-template <class T>
-inline bool operator==(const power_law_distribution<T>& lhs,
-	const power_law_distribution<T>& rhs)
-{
-	return lth == rth;
-}
+//template <class T>
+//inline bool operator==(const power_law_distribution<T>& lth,
+//	const power_law_distribution<T>& rth)
+//{
+//	return lth.par == rth.par;
+//}
 
-template <class T>
-inline bool operator!=(const power_law_distribution<T>& lhs,
-	const power_law_distribution<T>& rhs)
-{
-	return lth != rth;
-}
+//template <class T>
+//inline bool operator!=(const power_law_distribution<T>& lth,
+//	const power_law_distribution<T>& rth)
+//{
+//	return lth.par != rth.par;
+//}
 
 template <class charT, class traits, class T>
 inline std::basic_istream<charT, traits>& operator>>(std::basic_istream<charT, traits>& is,
