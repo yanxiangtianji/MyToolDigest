@@ -1,5 +1,7 @@
+#pragma once
 #ifndef __POWER_LAW_DISTRIBUTION_HPP
 #define __POWER_LAW_DISTRIBUTION_HPP
+
 #include <random>
 #include <limits>
 #include <stdexcept>
