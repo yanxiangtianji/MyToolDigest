@@ -13,3 +13,8 @@ A STL style distribution for power law.
 ## - my_type_traits
 
 Some additional type_traits for meta-programming like is_contailer, is_pair.
+
+## - streaming_container
+
+Adapt many STL types to ostream.
+Used for logging, debugging and unit testing.
