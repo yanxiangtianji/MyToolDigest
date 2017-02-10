@@ -26,9 +26,9 @@ A light weight STL liked logging system without 3rd party dependency.
 Supports:
 
 1. zout<<a<<b;              // normal output
-1. zout(lvl)<<a<<b;         // verbos output, actually showd when global verbos option level is higher or euqal to it
+1. zout(lvl)<<a<<b;         // verbose output, actually showd when global verbos option level is higher or euqal to it
 1. zout_if(cond)<<a<<b;     // conditional output
-1. zout_if(cond,lvl)<<a<<b; // verbos conditional output
+1. zout_if(cond,lvl)<<a<<b; // verbose conditional output
 
 ## - Multiple Launcher
 
