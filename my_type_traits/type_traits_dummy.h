@@ -8,6 +8,6 @@ namespace impl {
 		// used for static_assert(false,...) on g++ 
 		// g++ asserts a template function even it is not specalized.
 		template<typename T>
-		struct template_false_type :public std::false_type {};
+		struct template_false_type : public std::false_type {};
 	}
 }
