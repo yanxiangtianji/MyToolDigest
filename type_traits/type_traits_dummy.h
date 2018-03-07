@@ -1,4 +1,5 @@
 #pragma once
+#include <type_traits>
 
 namespace impl {
 	namespace type_traits {
