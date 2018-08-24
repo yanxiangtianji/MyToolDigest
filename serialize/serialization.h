@@ -1,16 +1,15 @@
 #pragma once
 #include <cstdint>
 #include "serialize_general.hpp"
-#include "tuple3_ps.h"
 
 /*
 Two ways to support customize type:
-1, (recommanded) add partial specialization struct for _Serializer.
+1, (recommended) add partial specialization struct for _Serializer.
 	Put it in a separated .hpp file and include it here.
 	A reference can be found at "serializer_basic.hpp" and you should include it.
 2, (using existing functions) use existing methods together with partial specialization functions.
 	Put existing methods' declarations in a .h file and include it here.
-	Then write parial specilization version for estimateSize, serial, deserial functions in this header file.
+	Then write partial specialization version for estimateSize, serial, deserial functions in this header file.
 	The partial spec. versions should directly call the existing function.
 	A reference can be found in Part III.
 */
@@ -81,22 +80,56 @@ template <class Cont>
 inline std::string serializeCont(typename Cont::const_iterator first, typename Cont::const_iterator last);
 
 /***********************************
-Part III, partial specialaizations
+Part III, partial specializations for customized data type
 ************************************/
 
-// for customize type AAA
+// for Motif
 //template<>
-//char* serialize<AAA>(char* res, int bufSize, const AAA& item) {
-//	return serialize_function_for_AAA(res, bufSize, item);
+//char* serialize<Motif>(char* res, int bufSize, const Motif& item) {
+//	return serializeMotif(res, bufSize, item);
 //}
 //
 //template<>
-//char* serialize(char* res, const AAA& item) {
-//	return serialize_function_for_AAA(res, item);
+//char* serialize(char* res, const Motif& item) {
+//	return serializeMotif(res, item);
 //}
 //
 //template <>
-//inline std::pair<AAA, const char*> deserialize<AAA>(const char* p) {
-//	return deserialize_function_for_AAA(p);
+//inline std::pair<Motif, const char*> deserialize<Motif>(const char* p) {
+//	return deserializeMotif(p);
+//}
+
+//template <>
+//inline std::pair<std::vector<Motif>, const char*> deserialize<std::vector<Motif>>(const char* p)
+//{
+//	return deserializeVM(p);
+//}
+//
+//template <>
+//inline std::pair<std::unordered_map<Motif, std::pair<int, double>>, const char*>
+//deserialize<std::unordered_map<Motif, std::pair<int, double>>>(const char* p)
+//{
+//	return deserializeMP(p);
+//}
+
+
+// for vector<Motif>
+//template <>
+//inline std::pair<char*, std::vector<Motif>::const_iterator>
+//serializeCont<std::vector<Motif>>(char* res, int bufSize,
+//	std::vector<Motif>::const_iterator first, std::vector<Motif>::const_iterator last)
+//{
+//	return serializeVM(res, bufSize, first, last);
+//}
+
+// for unordered_map<Motif, pair<int,double>>
+//template <>
+//inline std::pair<char*, std::unordered_map<Motif, std::pair<int, double>>::const_iterator> 
+//serializeCont<std::unordered_map<Motif, std::pair<int, double>>>(
+//	char* res, int bufSize,
+//	std::unordered_map<Motif, std::pair<int, double>>::const_iterator first,
+//	std::unordered_map<Motif, std::pair<int, double>>::const_iterator last)
+//{
+//	return serializeMP(res, bufSize, first, last);
 //}
 
